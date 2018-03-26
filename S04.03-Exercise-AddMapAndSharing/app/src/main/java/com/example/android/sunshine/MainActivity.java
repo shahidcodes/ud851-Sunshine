@@ -20,6 +20,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.ShareCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -30,6 +31,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.android.sunshine.ForecastAdapter.ForecastAdapterOnClickHandler;
 import com.example.android.sunshine.data.SunshinePreferences;
@@ -219,9 +221,16 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapterOn
             mForecastAdapter.setWeatherData(null);
             loadWeatherData();
             return true;
+        }else if (id == R.id.action_map){
+            Intent mapIntent = new Intent(Intent.ACTION_VIEW);
+            Uri mapLocation = Uri.parse("geo:0,0?q=Hyderabad,Telangana,IN");
+            mapIntent.setData(mapLocation);
+            if (mapIntent.resolveActivity(getPackageManager()) != null){
+                startActivity(mapIntent);
+            }else{
+                Toast.makeText(this, "Please install Google Maps", Toast.LENGTH_LONG).show();
+            }
         }
-
-        // TODO (2) Launch the map when the map menu item is clicked
 
         return super.onOptionsItemSelected(item);
     }

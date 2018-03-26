@@ -29,4 +29,12 @@
             android:padding="16dp"
             android:textSize="20sp" />
     </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/pb_spinner"
+        android:visibility="invisible"
+        android:layout_gravity="center"
+        android:layout_width="42dp"
+        android:layout_height="42dp" />
+
 </FrameLayout>
